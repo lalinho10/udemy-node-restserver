@@ -2,6 +2,7 @@ require('./config/config');
 
 const bodyParser = require('body-parser');
 const express = require('express');
+const mongoose = require('mongoose');
 
 
 
@@ -9,33 +10,20 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(require('./routes/usuario'));
 
-app.get('/', function(req, res) {
-    res.json('Bienevenida');
-});
 
-app.get('/usuario', function(req, res) {
-    res.json({ type: 'get', path: 'usuario' });
-});
 
-app.post('/usuario', function(req, res) {
-    let body = req.body;
+const connectionOptions = {
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useNewUrlParser: true
+};
 
-    if (body.nombre === undefined) {
-        res.status(400).json({ ok: false, mensaje: `Missing parameter 'nombre'` });
-    } else {
-        res.json({ type: 'post', path: 'usuario', body });
-    }
-});
+mongoose.connect(process.env.DB_CONNECTION, connectionOptions, (err, res) => {
+    if (err) throw err;
 
-app.put('/usuario/:id', function(req, res) {
-    let id = req.params.id;
-
-    res.json({ type: 'put', path: 'usuario', id });
-});
-
-app.delete('/usuario', function(req, res) {
-    res.json({ type: 'delete', path: 'usuario' });
+    console.log('Conectado a la BD');
 });
 
 
