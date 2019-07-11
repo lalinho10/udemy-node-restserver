@@ -14,7 +14,7 @@ const app = express();
 /***********************************************************
  * Consulta de usuarios
  ***********************************************************/
-app.get('/usuario', verifyToken, function(req, res) {
+app.get('/usuarios', verifyToken, function(req, res) {
     let pagina = req.query.pagina || 0;
     pagina = Number(pagina);
 
@@ -71,15 +71,26 @@ app.get('/usuario', verifyToken, function(req, res) {
 
             let limInf = offset + 1;
             let limSupTemp = (offset + regspp);
-            let limSup = (limSupTemp > numUsuarios) ? numUsuarios : limSupTemp
+            let limSup = (limSupTemp > numUsuarios) ? numUsuarios : limSupTemp;
 
-            res.json({
-                ok: true,
-                usuarios: usuarios,
-                desde: limInf,
-                hasta: limSup,
-                total: numUsuarios
-            });
+            let responseObject = {};
+
+            if (usuarios.length > 0) {
+                responseObject = {
+                    ok: true,
+                    usuarios: usuarios,
+                    desde: limInf,
+                    hasta: limSup,
+                    total: numUsuarios
+                };
+            } else {
+                responseObject = {
+                    ok: true,
+                    usuarios: usuarios
+                }
+            }
+
+            res.json(responseObject);
         });
     });
 });
