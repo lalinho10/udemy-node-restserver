@@ -13,7 +13,6 @@ const app = express();
 /***********************************************************
  * Consulta de productos
  ***********************************************************/
-
 app.get('/productos', verifyToken, function(req, res) {
     let pagina = req.query.pagina || 0;
     pagina = Number(pagina);
@@ -98,7 +97,6 @@ app.get('/productos', verifyToken, function(req, res) {
 /***********************************************************
  * Consulta de un producto
  ***********************************************************/
-
 app.get('/producto/:id', verifyToken, function(req, res) {
     let _id = req.params.id;
 
@@ -135,7 +133,6 @@ app.get('/producto/:id', verifyToken, function(req, res) {
 /***********************************************************
  * Creación de un nuevo producto
  ***********************************************************/
-
 app.post('/producto', verifyToken, function(req, res) {
     let body = req.body;
 
@@ -191,7 +188,6 @@ app.post('/producto', verifyToken, function(req, res) {
 /***********************************************************
  * Actualización de un producto
  ***********************************************************/
-
 app.put('/producto/:id', verifyToken, function(req, res) {
     let id = req.params.id;
     let updProducto = _.omit(req.body, ['nombre', 'usuario', 'categoria']);
@@ -229,7 +225,6 @@ app.put('/producto/:id', verifyToken, function(req, res) {
 /***********************************************************
  * Eliminación de un producto
  ***********************************************************/
-
 app.delete('/producto/:id', verifyToken, function(req, res) {
     let id = req.params.id;
 

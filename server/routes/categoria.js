@@ -12,7 +12,6 @@ const app = express();
 /***********************************************************
  * Consulta de categorias
  ***********************************************************/
-
 app.get('/categorias', verifyToken, function(req, res) {
     Categoria.find({}).sort('descripcion').populate('usuario', 'name email').exec((err, categorias) => {
         if (err) {
@@ -33,7 +32,6 @@ app.get('/categorias', verifyToken, function(req, res) {
 /***********************************************************
  * Consulta de una categoria
  ***********************************************************/
-
 app.get('/categoria/:id', verifyToken, function(req, res) {
     let _id = req.params.id;
 
@@ -70,7 +68,6 @@ app.get('/categoria/:id', verifyToken, function(req, res) {
 /***********************************************************
  * Creación de una nueva categoria
  ***********************************************************/
-
 app.post('/categoria', verifyToken, function(req, res) {
     let body = req.body;
 
@@ -98,7 +95,6 @@ app.post('/categoria', verifyToken, function(req, res) {
 /***********************************************************
  * Actualización de una categoria
  ***********************************************************/
-
 app.put('/categoria/:id', verifyToken, function(req, res) {
     let id = req.params.id;
 
@@ -137,7 +133,6 @@ app.put('/categoria/:id', verifyToken, function(req, res) {
 /***********************************************************
  * Eliminación de una categoria
  ***********************************************************/
-
 app.delete('/categoria/:id', [verifyToken, verifyAdminRole], function(req, res) {
     let id = req.params.id;
 
@@ -170,5 +165,7 @@ app.delete('/categoria/:id', [verifyToken, verifyAdminRole], function(req, res) 
         });
     });
 });
+
+
 
 module.exports = app;
