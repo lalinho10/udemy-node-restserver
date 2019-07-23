@@ -207,7 +207,7 @@ function removeImageFromFS(imageName, type) {
     let imagePath = path.resolve(__dirname, `../../uploads/${ type }/${ imageName }`);
 
     if (fs.existsSync(imagePath)) {
-        fs.unlink(imagePath);
+        fs.unlinkSync(imagePath);
     }
 }
 

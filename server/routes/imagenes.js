@@ -3,7 +3,6 @@ const path = require('path');
 
 
 const express = require('express');
-const mongoose = require('mongoose');
 
 
 const { verifyToken } = require('../middlewares/authentication');
@@ -21,7 +20,7 @@ app.get('/images/:tipo/:image', verifyToken, (req, res) => {
     if (allowedTypes.indexOf(type) === -1) {
         return res.status(400).json({
             ok: false,
-            message: 'Error while uploading files',
+            message: 'Error while downloading files',
             err: {
                 errors: {
                     id: {
